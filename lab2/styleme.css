@@ -1,0 +1,10 @@
+.aboutme {
+    background: #93caff;
+    font-family: Tahoma, serif;
+}
+
+.mood-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

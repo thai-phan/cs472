@@ -13,6 +13,7 @@
     color: yellow;
     animation-name: name;
     animation-duration: 4s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes name {

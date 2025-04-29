@@ -10,34 +10,35 @@
 }
 
 #name {
-    color: yellow;
-    animation-name: name;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
+    color: #0050ff;
+    /*animation-name: name;*/
+    /*animation-duration: 4s;*/
+    /*animation-iteration-count: infinite;*/
 }
 
-@keyframes name {
-    from {
-        color: red;
-    }
-    to {
-        color: yellow;
-    }
-}
+/*@keyframes name {*/
+/*    from {*/
+/*        color: red;*/
+/*    }*/
+/*    to {*/
+/*        color: yellow;*/
+/*    }*/
+/*}*/
 
 #friend-1, #friend-2 {
-    animation-name: friend;
-    animation-duration: 6s;
-    animation-iteration-count: infinite;
+    color: brown;
+    /*animation-name: friend;*/
+    /*animation-duration: 6s;*/
+    /*animation-iteration-count: infinite;*/
 }
 
-@keyframes friend {
-    0%   {color: #ff8800;}
-    25%  {color: yellow;}
-    50%  {color: #37ff00;}
-    100% {color: #cd00ff;}
-}
+/*@keyframes friend {*/
+/*    0%   {color: #ff8800;}*/
+/*    25%  {color: yellow;}*/
+/*    50%  {color: #37ff00;}*/
+/*    100% {color: #cd00ff;}*/
+/*}*/
 
-#friend-2 {
+/*#friend-2 {*/
 
-}
+/*}*/

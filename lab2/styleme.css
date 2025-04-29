@@ -24,7 +24,7 @@
     }
 }
 
-#friend-1 #friend-2 {
+#friend-1, #friend-2 {
     animation-name: name;
     animation-duration: 4s;
     animation-iteration-count: infinite;

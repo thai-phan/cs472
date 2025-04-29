@@ -8,3 +8,35 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+#name {
+    color: yellow;
+    animation-name: name;
+    animation-duration: 4s;
+}
+
+@keyframes name {
+    from {
+        color: red;
+    }
+    to {
+        color: yellow;
+    }
+}
+
+#friend-1 #friend-2 {
+    animation-name: name;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes friend {
+    0%   {background-color: #ff8800;}
+    25%  {background-color: yellow;}
+    50%  {background-color: #37ff00;}
+    100% {background-color: #cd00ff;}
+}
+
+#friend-2 {
+
+}

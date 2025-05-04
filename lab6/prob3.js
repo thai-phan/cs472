@@ -16,13 +16,16 @@ function Rabbit(name, speed) {
     Animal.call(this, name, speed);
 }
 
+Rabbit.prototype.hide = function () {
+    console.log(`${this.name} hides`);
+};
+
+
+
 Object.setPrototypeOf(Rabbit.prototype, Animal.prototype);
 Object.setPrototypeOf(Rabbit, Animal)
 
 
-Rabbit.prototype.hide = function () {
-    console.log(`${this.name} hides`);
-};
 
 const rabbit1 = new Rabbit("Bobby", 10);
 const rabbit2 = new Rabbit("Veronica", 10);

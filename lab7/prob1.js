@@ -2,8 +2,11 @@ function Student(studentId) {
     this.studentId = studentId;
     this.answers = [];
 
-    this.addAnswer = function (question, answer) {
-        this.answers.push({ qid: question.qid, answer: answer });
+    this.addAnswer = function (question) {
+        this.answers.push({
+            qid: question.qid,
+            answer: question.answer
+        });
     };
 }
 
@@ -18,23 +21,24 @@ function Question(qid, answer) {
 
 function Quiz(questionsArray, studentsArray) {
     this.questions = new Map();
+    this.students = studentsArray;
+
     questionsArray.forEach(q => {
         this.questions.set(q.qid, q);
     });
 
-    this.students = studentsArray;
 
     this.scoreStudentBySid = function (sid) {
         const student = this.students.find(s => s.studentId === sid);
         if (!student) return 0;
 
         let score = 0;
-        student.answers.forEach(({ qid, answer }) => {
+        student.answers.forEach(({qid, answer}) => {
             const question = this.questions.get(qid);
             if (question && question.checkAnswer(answer)) {
                 score++;
             }
-        });
+        }, this);
         return score;
     };
 
@@ -50,23 +54,24 @@ function Quiz(questionsArray, studentsArray) {
 }
 
 
-
-
 const student1 = new Student(10);
+student1.addAnswer(new Question(1, 'b'));
 student1.addAnswer(new Question(2, 'a'));
 student1.addAnswer(new Question(3, 'b'));
-student1.addAnswer(new Question(1, 'b'));
+
 const student2 = new Student(11);
-student2.addAnswer(new Question(3, 'b'));
-student2.addAnswer(new Question(2, 'a'));
 student2.addAnswer(new Question(1, 'd'));
+student2.addAnswer(new Question(2, 'a'));
+student2.addAnswer(new Question(3, 'b'));
+
 const students = [student1, student2];
 
-const questions =[
+const questions = [
     new Question(1, 'b'),
     new Question(2, 'a'),
     new Question(3, 'b')
 ];
+
 const quiz = new Quiz(questions, students);
 
 let scoreforStudent10 = quiz.scoreStudentBySid(10);

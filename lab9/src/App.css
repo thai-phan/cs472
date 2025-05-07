@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.color-red {
+  color: red;
+}
+
+.product-row {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

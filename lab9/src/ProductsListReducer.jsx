@@ -1,11 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import ProductReducer from "./ProductReducer.jsx";
 
 const ProductsList = (props) => {
-
-  useEffect(() => {
-    console.log(props.products)
-  }, [props]);
 
   return (
       <>

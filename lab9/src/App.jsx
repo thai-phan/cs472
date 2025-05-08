@@ -1,4 +1,4 @@
-import {useReducer, useState} from 'react'
+import React, {useReducer, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,9 +8,10 @@ import ProductsListReducer from "./ProductsListReducer.jsx";
 
 function reducer(state, action) {
   if (action.type === 'toggle') {
-    return state.map(data => {
+    let data = [...state]
+    return data.map(data => {
       if (data.id === action.id) {
-        data.inStock = !data.inStock;
+        data.inStock = action.status;
       }
       return data;
     });
@@ -32,10 +33,10 @@ function App() {
     {id: 3, name: 'Cherry', price: 2, inStock: true}
   ]);
 
-  const toggleInStock = (id) => {
+  const toggleInStock = (id, status) => {
     setData(prevState => prevState.map(d => {
       if (d.id === id) {
-        d.inStock = !d.inStock;
+        d.inStock = status;
       }
       return d;
     }))
@@ -56,6 +57,12 @@ function App() {
 
         <div>useReducer</div>
         <ProductsListReducer products={state} dispatch={dispatch}/>
+
+        <button onClick={() => {
+          console.log("aaa")
+        }}>
+          show In Stock status
+        </button>
       </>
   )
 }

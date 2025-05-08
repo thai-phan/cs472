@@ -1,7 +1,7 @@
 import React from "react"
 
 const ProductReducer = (props) => {
-  const {id, name, price, inStock, dispatch} = props.product;
+  const {id, name, price, inStock} = props.product;
   return (
       <div className={"product-row"}>
 
@@ -14,13 +14,12 @@ const ProductReducer = (props) => {
         <div>
           Price: {price}
         </div>
-        <div >
+        <div>
           In Stock: {inStock ? "In stock" : "Not in stock"}
         </div>
-        <button onClick={() =>  dispatch({
-          type: 'toggle',
-          id: id
-        })}>show In Stock status</button>
+        <button onClick={() => props.dispatch({type: 'toggle', id: id, status: !inStock})}>
+          show In Stock status
+        </button>
       </div>
 
   )

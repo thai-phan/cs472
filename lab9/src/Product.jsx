@@ -1,7 +1,7 @@
 import React from "react";
 
 const Product = (props) => {
-  const {id, name, price, inStock, toggleInStock} = props.product;
+  const {id, name, price, inStock} = props.product;
   return (
       <div className={"product-row"}>
 
@@ -17,7 +17,7 @@ const Product = (props) => {
         <div >
           In Stock: {inStock ? "In stock" : "Not in stock"}
         </div>
-        <button onClick={() => toggleInStock(id)}>show In Stock status</button>
+        <button onClick={() => props.toggleInStock(id, !inStock)}>show In Stock status</button>
       </div>
 
   )

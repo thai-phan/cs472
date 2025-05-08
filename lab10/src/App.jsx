@@ -1,34 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, {useContext, useEffect, useState} from 'react'
 import './App.css'
+import Book from "./Book.jsx";
+import BookList from "./BookList.jsx";
+import AddForm from "./AddForm.jsx";
+import EditForm from "./EditForm.jsx";
+
+
+export const BookContext = React.createContext(undefined);
+
+// The list of books.
+// Functions for adding, updating, and deleting books.
+// Loading and error states for API calls.
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState(0)
+
+  useEffect(() => {
+    fetch("https://681cfa43f74de1d219ae6e44.mockapi.io/books")
+        .then(response => response.json()).then(data => setBooks(data))
+  }, []);
+
+  const updateBook = () => {
+    console.log("update Book")
+  }
+
+  const deleteBook = () => {
+    console.log("delete Book")
+  }
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <BookContext.Provider value={{ books, updateBook: updateBook, deleteBook: deleteBook}}>
+        <div>
+          Book management
+        </div>
+        <div>
+          <BookList></BookList>
+        </div>
+        <div>
+          <AddForm ></AddForm>
+        </div>
+          <EditForm ></EditForm>
+        <div>
+          Edit form
+        </div>
+      </BookContext.Provider>
   )
 }
 

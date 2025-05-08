@@ -1,12 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {use, useEffect, useState} from 'react'
 import './App.css'
 import Book from "./Book.jsx";
 import BookList from "./BookList.jsx";
-import AddForm from "./AddForm.jsx";
-import EditForm from "./EditForm.jsx";
+import FormAdd from "./FormAdd.jsx";
+import FormUpdate from "./FormUpdate.jsx";
 
 
-export const BookContext = React.createContext(undefined);
+export const BookContext = React.createContext({
+  books: null,
+  updateBook: null,
+  addBook: null,
+  deleteBook: null,
+  curBook: null,
+  setCurBook: null,
+});
 
 // The list of books.
 // Functions for adding, updating, and deleting books.
@@ -16,22 +23,72 @@ export const BookContext = React.createContext(undefined);
 function App() {
   const [books, setBooks] = useState(0)
 
-  useEffect(() => {
+  const [curBook, setCurBook] = useState({})
+
+  const loadData = () => {
     fetch("https://681cfa43f74de1d219ae6e44.mockapi.io/books")
         .then(response => response.json()).then(data => setBooks(data))
-  }, []);
-
-  const updateBook = () => {
-    console.log("update Book")
   }
 
-  const deleteBook = () => {
-    console.log("delete Book")
+  useEffect(() => {
+    loadData()
+  }, []);
+
+  const updateBook = (id, title, author) => {
+    fetch(`https://681cfa43f74de1d219ae6e44.mockapi.io/books/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        title: title,
+        author: author
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(response => response.json()).then(data => {
+      console.log(data)
+      loadData()
+    })
+
+    console.log("updateBook Book")
+  }
+
+  const addBook = (title, author) => {
+    fetch(`https://681cfa43f74de1d219ae6e44.mockapi.io/books`, {
+      method: "POST",
+      body: JSON.stringify({
+        title: title,
+        author: author
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(response => response.json()).then(data => {
+      console.log(data)
+      loadData()
+    })
+  }
+
+
+  const deleteBook = (id) => {
+    fetch(`https://681cfa43f74de1d219ae6e44.mockapi.io/books/${id}`, {
+      method: "DELETE",
+    }).then(response => response.json()).then(data => {
+      console.log(data)
+      loadData()
+    })
+    console.log("delete book")
   }
 
 
   return (
-      <BookContext.Provider value={{ books, updateBook: updateBook, deleteBook: deleteBook}}>
+      <BookContext.Provider value={{
+        books,
+        curBook,
+        setCurBook: setCurBook,
+        addBook: addBook,
+        updateBook: updateBook,
+        deleteBook: deleteBook
+      }}>
         <div>
           Book management
         </div>
@@ -39,11 +96,10 @@ function App() {
           <BookList></BookList>
         </div>
         <div>
-          <AddForm ></AddForm>
+          <FormAdd></FormAdd>
         </div>
-          <EditForm ></EditForm>
         <div>
-          Edit form
+          <FormUpdate></FormUpdate>
         </div>
       </BookContext.Provider>
   )

@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
-const Product = (props) => {
-  const {id, name, price, inStock, toggleInStock} = props.product;
+const ProductReducer = (props) => {
+  const {id, name, price, inStock, dispatch} = props.product;
   return (
       <div className={"product-row"}>
 
@@ -17,10 +17,13 @@ const Product = (props) => {
         <div >
           In Stock: {inStock ? "In stock" : "Not in stock"}
         </div>
-        <button onClick={() => toggleInStock(id)}>show In Stock status</button>
+        <button onClick={() =>  dispatch({
+          type: 'toggle',
+          id: id
+        })}>show In Stock status</button>
       </div>
 
   )
 }
 
-export default Product
+export default ProductReducer

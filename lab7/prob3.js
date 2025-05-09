@@ -38,8 +38,9 @@ class Genre {
       let movie = curGenre.find(m => m.id === movie_id)
       if (movie) {
         movie.title = new_title
+        return true;
       }
-      return true;
+      return false;
     } else {
       return false;
     }
@@ -50,12 +51,15 @@ class Genre {
     // return true if the movie is delete successfully, false otherwise
     if (this.#movies.get(genre) !== null) {
       let curGenre = this.#movies.get(genre)
-      this.#movies.set(genre, curGenre.filter(m => m.id !== movie_id))
-      return true;
+      let movies = curGenre.filter(m => m.id !== movie_id)
+      if (movies) {
+        this.#movies.set(genre, curGenre.filter(m => m.id !== movie_id))
+        return true;
+      }
+      return false;
     } else {
       return false;
     }
-
   }
 
   get_movie_title_by_id(genre, movie_id) {
@@ -63,9 +67,12 @@ class Genre {
     if (this.#movies.get(genre) !== null) {
       let curGenre = this.#movies.get(genre)
       let movie = curGenre.find(m => m.id === movie_id)
-      return movie.title;
+      if (movie) {
+        return movie.title;
+      }
+      return "empty"
     } else {
-      return false;
+      return "empty";
     }
   }
 }

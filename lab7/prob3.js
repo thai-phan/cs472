@@ -1,62 +1,98 @@
-class Exercise3 {
-    #movies = new Map();
-
-    //key is the genre: string, value is array of movies
-    examples = {
-        thriller: [
-            { id: '1', title: 'The American' },
-            { id: '2', title: 'Arcadian' }
-        ],
-        action: [
-            { id: '3', title: 'Mad Max: Fury Road' },
-            { id: '4', title: 'John Wick' }
-        ],
-        comedy: [
-            { id: '5', title: 'The Grand Budapest Hotel' },
-            { id: '6', title: 'Superbad' }
-        ],
-        drama: [
-            { id: '7', title: 'The Shawshank Redemption' },
-            { id: '8', title: 'Forrest Gump' }
-        ],
-        sciFi: [
-            { id: '9', title: 'Inception' },
-            { id: '10', title: 'Interstellar' }
-        ],
-        horror: [
-            { id: '11', title: 'Get Out' },
-            { id: '12', title: 'Hereditary' }
-        ]
-    };
+class Genre {
+  #movies = new Map();
 
 
+  add_genre(genre) {
+    // add genre if genre does not exist
+    // return true if the genre is added successfully, false otherwise
+    if (this.#movies.get(genre) !== null) {
+      this.#movies.set(genre, [])
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-    add_genre() {
-// add genre if genre does not exist
-// return true if the genre is added successfully, false otherwise
-        return true;
+  add_movie_in_genre(genre, new_movie) {
+    // add movie if movie id does not exist
+    // return true if the movie is added successfully, false otherwise
+    if (this.#movies.get(genre) !== null) {
+      let curGenre = this.#movies.get(genre)
+      curGenre.push({
+        id: (curGenre.length + 1).toString(),
+        title: new_movie
+      })
+      this.#movies.set(genre, curGenre)
+      return true;
+    } else {
+      return false;
     }
 
-    add_movie_in_genre(genre, new_movie) {
-// add movie if movie id does not exist
-// return true if the movie is added successfully, false otherwise
-        return true;
+  }
+
+  update_movie_title_by_genre_and_movie_id(genre, movie_id, new_title) {
+    // update a movie within a certain genre
+    // return true if the movie's title is updated successfully, false otherwise
+    if (this.#movies.get(genre) !== null) {
+      let curGenre = this.#movies.get(genre)
+      let movie = curGenre.find(m => m.id === movie_id)
+      if (movie) {
+        movie.title = new_title
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  delete_movie_by_genre_and_movie_id(genre, movie_id) {
+    // delete movie
+    // return true if the movie is delete successfully, false otherwise
+    if (this.#movies.get(genre) !== null) {
+      let curGenre = this.#movies.get(genre)
+      this.#movies.set(genre, curGenre.filter(m => m.id !== movie_id))
+      return true;
+    } else {
+      return false;
     }
 
-    update_movie_title_by_genre_and_movie_id(genre, movie_id, new_title) {
-// update a movie within a certain genre
-// return true if the movie's title is updated successfully, false otherwise
-        return true;
-    }
+  }
 
-    delete_movie_by_genre_and_movie_id(genre, movie_id) {
-// delete movie
-// return true if the movie is delete successfully, false otherwise
-        return true;
-    }
-
-    get_movie_title_by_id(genre, movie_id) {
+  get_movie_title_by_id(genre, movie_id) {
 // return the movie title
-        return '';
+    if (this.#movies.get(genre) !== null) {
+      let curGenre = this.#movies.get(genre)
+      let movie = curGenre.find(m => m.id === movie_id)
+      return movie.title;
+    } else {
+      return false;
     }
+  }
 }
+
+let genre = new Genre()
+
+genre.add_genre("action")
+let movie1 = genre.add_movie_in_genre("action", "Mad Max: Fury Road")
+console.log("add_movie_in_genre", movie1)
+
+let movie2 = genre.add_movie_in_genre("action", "John Wick")
+console.log("add_movie_in_genre", movie2)
+
+
+genre.add_genre("drama")
+
+let movie3 = genre.add_movie_in_genre("drama", "The Shawshank Redemption")
+console.log("add_movie_in_genre", movie3)
+
+let movie4 = genre.add_movie_in_genre("drama", "Forrest Gump")
+console.log("add_movie_in_genre", movie4)
+
+let title = genre.get_movie_title_by_id("action", "1")
+console.log("get_movie_title_by_id", title)
+
+let updated = genre.update_movie_title_by_genre_and_movie_id("action", "1", "Mad Max: End Game")
+console.log("update_movie_title_by_genre_and_movie_id", updated)
+
+let deleted = genre.delete_movie_by_genre_and_movie_id("drama", "2")
+console.log("delete_movie_by_genre_and_movie_id", deleted)

@@ -8,25 +8,19 @@ const Book = (props) => {
   const {setCurBook, deleteBook} = useContext(BookContext)
 
   return (
-      <div className={"book-row"}>
-        <div>
-          {book.id}
-        </div>
-        <div>
-          {book.title}
-        </div>
-        <div>
-          {book.author}
-        </div>
-        <div>
-          <button onClick={() => setCurBook(book)}>Update
-          </button>
+      // className={"book-row border"}
+      <tr>
+        <td> {book.id}</td>
+        <td> {book.title}</td>
+        <td> {book.author}</td>
+        <td>
+          <button onClick={() => setCurBook(book)}>Select to Update</button>
+        </td>
+        <td>
           <button onClick={() => deleteBook(book.id)}>Delete</button>
-        </div>
-      </div>
+        </td>
+      </tr>
   )
-
-
 }
 
 export default Book

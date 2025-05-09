@@ -89,18 +89,24 @@ function App() {
         updateBook: updateBook,
         deleteBook: deleteBook
       }}>
-        <div>
+        <h1>
           Book management
+        </h1>
+        <div className={"layout-grid"}>
+          <div className={"margin-10 border col-1"}>
+            <BookList></BookList>
+          </div>
+          <div className={"margin-10 border"}>
+            <div className={"margin-5 border add-wrapper"}>
+              <FormAdd></FormAdd>
+            </div>
+            <div className={"margin-5 border update-wrapper"}>
+              <FormUpdate></FormUpdate>
+            </div>
+          </div>
+
         </div>
-        <div>
-          <BookList></BookList>
-        </div>
-        <div>
-          <FormAdd></FormAdd>
-        </div>
-        <div>
-          <FormUpdate></FormUpdate>
-        </div>
+
       </BookContext.Provider>
   )
 }

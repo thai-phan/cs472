@@ -43,8 +43,37 @@
 
 .book-row {
   width: 800px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
   margin-bottom: 10px;
+  grid-template-columns: 100px;
+}
+
+.book-row div {
+  grid-row: 1;
+  border: 1px solid black;
+}
+.border {
+  border: 1px solid black;
+}
+
+.border tr td {
+  border: 1px solid black;
+}
+
+.table {
+  height: 500px;
+  overflow: scroll;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 600px 600px ;
+}
+
+.margin-10 {
+  margin: 10px;
+}
+
+.margin-5 {
+  margin: 5px;
 }

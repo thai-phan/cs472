@@ -6,8 +6,9 @@ const FormUpdate = () => {
   const [formTitle, setFormTitle] = useState("")
   const [formAuthor, setFormAuthor] = useState("")
 
+
   const {updateBook, curBook} = useContext(BookContext)
-  const {title, author} = curBook
+  const {id, title, author} = curBook
 
   useEffect(() => {
     if (title) {
@@ -20,13 +21,21 @@ const FormUpdate = () => {
 
   return (
       <div>
-        <form>
-          <label htmlFor="title">Title</label>
-          <input id={"title"} type="text" value={formTitle} onChange={event => setFormTitle(event.target.value)}/>
-          <label htmlFor="author">Author</label>
-          <input id={"author"} type="text" value={formAuthor} onChange={event => setFormAuthor(event.target.value)}/>
-        </form>
-        <button onClick={() => updateBook(formTitle, formAuthor)}>Update Book</button>
+        <h2>Update Book</h2>
+        <div className={"margin-5"}>
+          <form>
+            <div className={"margin-5"}>
+              <label style={{display: "inline-block", width: 100}} htmlFor="title">Title</label>
+              <input id={"title"} type="text" value={formTitle} onChange={event => setFormTitle(event.target.value)}/>
+            </div>
+            <div className={"margin-5"}>
+              <label style={{display: "inline-block", width: 100}} htmlFor="author">Author</label>
+              <input id={"author"} type="text" value={formAuthor}
+                     onChange={event => setFormAuthor(event.target.value)}/>
+            </div>
+          </form>
+          <button onClick={() => updateBook(id, formTitle, formAuthor)}>Update Book</button>
+        </div>
       </div>
   )
 }

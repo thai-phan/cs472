@@ -1,4 +1,3 @@
-
 import React, {useContext, useEffect} from "react";
 import {BookContext} from "./App.jsx";
 import Book from "./Book.jsx";
@@ -7,14 +6,23 @@ const BookList = () => {
   const {books} = useContext(BookContext)
 
 
-
   return (
-     <div>
-       List Books
-       {
-           books && books.map((book, idx) => <Book key={idx} book={book} />)
-       }
-     </div>
+      <div className={"table"}>
+        <table className={"border"}>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {
+              books && books.map((book, idx) => <Book key={idx} book={book}/>)
+          }
+
+        </table>
+
+      </div>
   )
 }
 

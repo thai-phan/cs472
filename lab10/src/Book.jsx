@@ -8,7 +8,6 @@ const Book = (props) => {
   const {setCurBook, deleteBook} = useContext(BookContext)
 
   return (
-      // className={"book-row border"}
       <tr>
         <td> {book.id}</td>
         <td> {book.title}</td>

@@ -44,12 +44,15 @@ function App() {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(response => response.json()).then(data => {
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error('Update book fail!');
+    }).then(data => {
       console.log(data)
       loadData()
-    })
-
-    console.log("updateBook Book")
+    }).catch(err => console.error(err))
   }
 
   const addBook = (title, author) => {
@@ -62,21 +65,30 @@ function App() {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(response => response.json()).then(data => {
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Add book fail!');
+    }).then(data => {
       console.log(data)
       loadData()
-    })
+    }).catch(err => console.error(err))
   }
 
 
   const deleteBook = (id) => {
     fetch(`https://681cfa43f74de1d219ae6e44.mockapi.io/books/${id}`, {
       method: "DELETE",
-    }).then(response => response.json()).then(data => {
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error('Delete book fail!');
+    }).then(data => {
       console.log(data)
       loadData()
-    })
-    console.log("delete book")
+    }).catch(err => console.error(err))
   }
 
 

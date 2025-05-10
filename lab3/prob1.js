@@ -14,7 +14,7 @@ console.log(resultA)
 let arrayB = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const printOddNumbersOnly = (arr) => {
-    return arr.filter((el) => el % 2 === 0);
+    return arr.filter((el) => el % 2 === 1);
 }
 
 let resultB = printOddNumbersOnly(arrayB)

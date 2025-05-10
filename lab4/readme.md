@@ -54,7 +54,7 @@ TDZ: {}
 
 Outer: cFunction,
 
-LE: [{a: 8, b: 9, c: 10, x: 5}]
+LE: [{a: 8, b: 9, c: 10, x: 10}]
 
 TDZ: {}
 

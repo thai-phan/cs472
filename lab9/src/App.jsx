@@ -57,12 +57,6 @@ function App() {
 
         <div>useReducer</div>
         <ProductsListReducer products={state} dispatch={dispatch}/>
-
-        <button onClick={() => {
-          console.log("aaa")
-        }}>
-          show In Stock status
-        </button>
       </>
   )
 }

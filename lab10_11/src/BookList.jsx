@@ -8,7 +8,8 @@ const BookList = () => {
 
   return (
       <div className={"table"}>
-        <table className={"border"}>
+        <table className={"border book-table"}>
+          <tbody>
           <tr>
             <th>ID</th>
             <th>Title</th>
@@ -16,6 +17,7 @@ const BookList = () => {
             <th>Update</th>
             <th>Delete</th>
           </tr>
+          </tbody>
           {
               books && books.map((book, idx) => <Book key={idx} book={book}/>)
           }

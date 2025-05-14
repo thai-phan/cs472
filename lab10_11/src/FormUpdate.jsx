@@ -5,7 +5,7 @@ import {BookContext} from "./App.jsx";
 const FormUpdate = () => {
   const [formTitle, setFormTitle] = useState("")
   const [formAuthor, setFormAuthor] = useState("")
-
+  const [formId, setFormId] = useState("")
 
   const {updateBook, curBook} = useContext(BookContext)
   const {id, title, author} = curBook
@@ -17,13 +17,20 @@ const FormUpdate = () => {
     if (author) {
       setFormTitle(author)
     }
-  }, [author, title]);
+    if (id) {
+      setFormId(id)
+    }
+  }, [author, title, id]);
 
   return (
       <div>
         <h2>Update Book</h2>
         <div className={"margin-5"}>
           <form>
+            <div className={"margin-5"}>
+              <label style={{display: "inline-block", width: 100}} htmlFor="title">ID</label>
+              <input id={"title"} type="text" value={formId} disabled={true}/>
+            </div>
             <div className={"margin-5"}>
               <label style={{display: "inline-block", width: 100}} htmlFor="title">Title</label>
               <input id={"title"} type="text" value={formTitle} onChange={event => setFormTitle(event.target.value)}/>

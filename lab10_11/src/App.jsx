@@ -4,15 +4,11 @@ import Book from "./Book.jsx";
 import BookList from "./BookList.jsx";
 import FormAdd from "./FormAdd.jsx";
 import FormUpdate from "./FormUpdate.jsx";
+import {NavLink, Route, Routes} from "react-router";
 
 
 export const BookContext = React.createContext({
-  books: null,
-  updateBook: null,
-  addBook: null,
-  deleteBook: null,
-  curBook: null,
-  setCurBook: null,
+  books: null, updateBook: null, addBook: null, deleteBook: null, curBook: null, setCurBook: null,
 });
 
 // The list of books.
@@ -36,16 +32,14 @@ function App() {
 
   const updateBook = (id, title, author) => {
     fetch(`https://681cfa43f74de1d219ae6e44.mockapi.io/books/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        title: title,
-        author: author
-      }),
-      headers: {
+      method: "PUT", body: JSON.stringify({
+        title: title, author: author
+      }), headers: {
         "Content-Type": "application/json",
       },
     }).then(response => {
       if (response.ok) {
+        alert("Update book success!")
         return response.json()
       }
       throw new Error('Update book fail!');
@@ -57,16 +51,14 @@ function App() {
 
   const addBook = (title, author) => {
     fetch(`https://681cfa43f74de1d219ae6e44.mockapi.io/books`, {
-      method: "POST",
-      body: JSON.stringify({
-        title: title,
-        author: author
-      }),
-      headers: {
+      method: "POST", body: JSON.stringify({
+        title: title, author: author
+      }), headers: {
         "Content-Type": "application/json",
       },
     }).then(response => {
       if (response.ok) {
+        alert("Add book success!")
         return response.json();
       }
       throw new Error('Add book fail!');
@@ -82,6 +74,7 @@ function App() {
       method: "DELETE",
     }).then(response => {
       if (response.ok) {
+        alert("Delete book success!")
         return response.json()
       }
       throw new Error('Delete book fail!');
@@ -92,35 +85,42 @@ function App() {
   }
 
 
-  return (
-      <BookContext.Provider value={{
-        books,
-        curBook,
-        setCurBook: setCurBook,
-        addBook: addBook,
-        updateBook: updateBook,
-        deleteBook: deleteBook
-      }}>
-        <h1>
-          Book management
-        </h1>
-        <div className={"layout-grid"}>
-          <div className={"margin-10 border col-1"}>
-            <BookList></BookList>
-          </div>
-          <div className={"margin-10 border"}>
-            <div className={"margin-5 border add-wrapper"}>
-              <FormAdd></FormAdd>
-            </div>
-            <div className={"margin-5 border update-wrapper"}>
-              <FormUpdate></FormUpdate>
-            </div>
-          </div>
+  return (<BookContext.Provider value={{
+    books, curBook, setCurBook: setCurBook, addBook: addBook, updateBook: updateBook, deleteBook: deleteBook
+  }}>
+    <h1>
+      Book management
+    </h1>
+    <nav>
+      <NavLink className={"margin-5"} to="/book-list">Book List</NavLink>
+      <NavLink className={"margin-5"} to="/add-book">Add Book</NavLink>
+      <NavLink className={"margin-5"} to="/update-book">Update Book</NavLink>
+    </nav>
 
-        </div>
+    {/*Split the application into smaller components (AddBook, ListBooks, EditBook) and*/}
 
-      </BookContext.Provider>
-  )
+    <div className={"layout-grid"}>
+      <div className={"margin-10 border"}>
+        <Routes>
+          <Route path="/book-list" element={<BookList/>}/>
+          <Route path="/add-book" element={<FormAdd/>}/>
+          <Route path="/update-book" element={<FormUpdate/>}/>
+        </Routes>
+
+        {/*<BookList></BookList>*/}
+      </div>
+      {/*<div className={"margin-10 border"}>*/}
+      {/*  <div className={"margin-5 border add-wrapper"}>*/}
+      {/*    <FormAdd></FormAdd>*/}
+      {/*  </div>*/}
+      {/*  <div className={"margin-5 border update-wrapper"}>*/}
+      {/*    <FormUpdate></FormUpdate>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+
+    </div>
+
+  </BookContext.Provider>)
 }
 
 export default App

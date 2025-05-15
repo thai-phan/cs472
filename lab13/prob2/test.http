@@ -1,0 +1,23 @@
+// o GET /addition/2/3
+// o GET /addition/?a=2&b=3
+// o POST /addition/ BODY ?a=2&b=3
+// o POST /addition/ BODY {a:2,b:3}
+
+
+###
+GET http://localhost:3000/addition/2/3
+
+###
+GET http://localhost:3000/addition/?a=2&b=3
+
+
+###
+//
+GET http://localhost:3000/addition/?a=2&b=3
+// o POST /addition/ BODY {a:2,b:3}
+
+###
+POST localhost:3000
+
+###
+// o POST /addition/ BODY {a:2,b:3}
